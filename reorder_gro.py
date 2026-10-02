@@ -1,6 +1,7 @@
 import os
 from collections import defaultdict
-gro = "solv_fix_renum.gro"
+ingro = "solv_fix.gro"
+outgro = "solv_fix_renum.gro"
 top = "topol.top"
 
 def order():
@@ -23,7 +24,7 @@ def gro_arrange(top_order):
     header = []
     atoms = []
     box = ""
-    with open(gro, 'r') as f:
+    with open(ingro, 'r') as f:
         lines = f.readlines()
         header = lines[:2]
         box = lines[-1].strip()
@@ -37,7 +38,7 @@ def gro_arrange(top_order):
     return header, atoms, box
 print(gro_arrange)
 def write_gro(header, atoms, box):
-    with open('solv_ordered.gro', 'w') as f:
+    with open(outgro, 'w') as f:
         f.write(header[0])
         f.write(f"{len(atoms):5d}\n")
         for line in atoms:
